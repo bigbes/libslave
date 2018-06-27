@@ -52,7 +52,6 @@ const char* Field_tiny::unpack(const char* from) {
     return from + pack_length();
 }
 
-
 Field_short::Field_short(const std::string& field_name_arg, const std::string& type):
     Field_num(field_name_arg, type) {}
 
@@ -689,6 +688,88 @@ const char* Field_bit::unpack(const char *from)
     field_data = value;
 
     return from + _pack_length;
+}
+void Field_tiny::unpack_str(const std::string& from) {
+    if (from.size()) {
+        uint16 value;
+        std::istringstream s(from);
+        s >> value;
+        field_data = value;
+    } else {
+        field_data = boost::any();
+    }
+}
+void Field_short::unpack_str(const std::string& from) {
+    if (from.size()) {
+        uint16 value;
+        std::istringstream s(from);
+        s >> value;
+        field_data = value;
+    } else {
+        field_data = boost::any();
+    }
+}
+void Field_medium::unpack_str(const std::string& from) {
+    if (from.size()) {
+        uint32 value;
+        std::istringstream s(from);
+        s >> value;
+        field_data = value;
+    } else {
+        field_data = boost::any();
+    }
+}
+void Field_long::unpack_str(const std::string& from) {
+    if (from.size()) {
+        uint32 value;
+        std::istringstream s(from);
+        s >> value;
+        field_data = value;
+    } else {
+        field_data = boost::any();
+    }
+}
+void Field_longlong::unpack_str(const std::string& from) {
+    if (from.size()) {
+        ulonglong value;
+        std::istringstream s(from);
+        s >> value;
+        field_data = value;
+    } else {
+        field_data = boost::any();
+    }
+}
+
+void Field_float::unpack_str(const std::string& from) {
+    if (from.size()) {
+        float value;
+        std::istringstream s(from);
+        s >> value;
+        field_data = value;
+    } else {
+        field_data = boost::any();
+    }
+}
+
+void Field_double::unpack_str(const std::string& from) {
+    if (from.size()) {
+        double value;
+        std::istringstream s(from);
+        s >> value;
+        field_data = value;
+    } else {
+        field_data = boost::any();
+    }
+}
+
+void Field_bit::unpack_str(const std::string& from) {
+    unsigned long long value = 0;
+
+    for (const auto b : from) {
+        value = (value << 8) | b;
+    }
+
+    field_data = value;
 }
 
 } // namespace slave

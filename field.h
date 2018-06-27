@@ -40,6 +40,7 @@ public:
     boost::any field_data;
 
     virtual const char* unpack(const char *from) = 0;
+    virtual void unpack_str(const std::string &from) { field_data = from; };
 
     Field(const std::string& field_name_arg, const std::string& type) :
         field_type(type),
@@ -90,6 +91,7 @@ class Field_tiny: public Field_num {
 public:
     Field_tiny(const std::string& field_name_arg, const std::string& type);
     const char* unpack(const char* from);
+    void unpack_str(const std::string& from);
 };
 
 class Field_short: public Field_num {
@@ -98,6 +100,7 @@ public:
     Field_short(const std::string& field_name_arg, const std::string& type);
 
     const char* unpack(const char* from);
+    void unpack_str(const std::string& from);
 };
 
 class Field_medium: public Field_num {
@@ -106,6 +109,7 @@ public:
     Field_medium(const std::string& field_name_arg, const std::string& type);
 
     const char* unpack(const char* from);
+    void unpack_str(const std::string& from);
 };
 
 class Field_long: public Field_num {
@@ -114,6 +118,7 @@ public:
     Field_long(const std::string& field_name_arg, const std::string& type);
 
     const char* unpack(const char* from);
+    void unpack_str(const std::string& from);
 };
 
 class Field_longlong: public Field_num {
@@ -122,6 +127,7 @@ public:
     Field_longlong(const std::string& field_name_arg, const std::string& type);
 
     const char* unpack(const char* from);
+    void unpack_str(const std::string& from);
 };
 
 class Field_float: public Field_real {
@@ -130,6 +136,7 @@ public:
     Field_float(const std::string& field_name_arg, const std::string& type);
 
     const char* unpack(const char* from);
+    void unpack_str(const std::string& from);
 };
 
 class Field_double: public Field_real {
@@ -138,6 +145,7 @@ public:
     Field_double(const std::string& field_name_arg, const std::string& type);
 
     const char* unpack(const char* from);
+    void unpack_str(const std::string& from);
 };
 
 class Field_temporal: public Field_longstr {
@@ -278,6 +286,7 @@ public:
     Field_bit(const std::string& field_name_arg, const std::string& type);
 
     const char* unpack(const char *from);
+    void unpack_str(const std::string& from);
 
     unsigned int pack_length() const {
         return _pack_length;
